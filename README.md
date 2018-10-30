@@ -4,6 +4,8 @@ Tag Editor for WIP.chat
 Makes it easy to replace todo tags (prefixes to your todo).
 ---
 
+![Gif of Editor in Action](http://public.designbymobi.us/img/wip-todo-updater.gif)
+
 ## Config ##
 
 ```
