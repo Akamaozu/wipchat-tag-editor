@@ -4,6 +4,8 @@ Tag Editor for WIP.chat
 Makes it easy to replace todo tags (prefixes to your todo).
 ---
 
+## Config ##
+
 ```
 var replacement_map = {
   '[create]': "🛠️",
@@ -11,10 +13,11 @@ var replacement_map = {
 }
 ```
 
-creates
+## Results ##
 
-`[create] WIP.chat Tag Editor Repo -> 🛠️ WIP.chat Tag Editor Repo`
-`🗺️ WIP.chat Tag Editor Repo -> [plan] WIP.chat Tag Editor Repo`
+`[create] WIP.chat Tag Editor Repo` -> `🛠️ WIP.chat Tag Editor Repo`
+
+`🗺️ WIP.chat Tag Editor Repo` -> `[plan] WIP.chat Tag Editor Repo`
 
 
 How to Use
