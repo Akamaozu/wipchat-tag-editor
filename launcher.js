@@ -95,31 +95,33 @@ function move_hashtags( direction ){
         setTimeout( function(){
 
           // #5 find input field
-            var input = document.querySelector( '.todo--editing textarea' );
+            var input = document.querySelector( '.todo--editing textarea' ),
+                submit_btn = document.querySelector( '.todo--editing form input[type="submit"]' );
 
           // #6 do replacement in input field
             var todo = input.innerHTML,
-                hashtag_position = todo.indexOf( '#' );
-
-            if( ! hashtag_position || hashtag_position === 0 ) return task.next();
-
-            var split_todo = todo.split( '#' );
+                split_todo = todo.split( '#' );
 
             if( split_todo.length !== 2 ){
-              alert( 'this todo may have multiple hashtags, which this tool doesnt currently support :(' );
-              document.querySelector( '.todo--editing form a' ).click();
+              submit_btn.click();
               return task.next();
             }
 
+            var hashtag_position = todo.indexOf( '#' );
+
             if( direction === 'rtl' ){
-              if( hashtag_position === 0 ) return task.next();
+              if( hashtag_position === 0 ){
+                submit_btn.click();
+                return task.next();
+              } 
 
               var hashtag_text = split_todo[1],
                   split_hashtag_text = hashtag_text.split(' ');
 
               if( split_hashtag_text.length > 1 ) {
                 alert( 'hashtag in this todo is not on the furthest right position. may be used in a sentence, so skipping!' );
-                document.querySelector( '.todo--editing form a' ).click();
+
+                submit_btn.click();
                 return task.next();
               }
 
@@ -129,7 +131,8 @@ function move_hashtags( direction ){
             if( direction === 'ltr' ){
               if( hashtag_position !== 0 ){
                 alert( 'hashtag in this todo is not on the furthest left position. may be used in a sentence, so skipping!' );
-                document.querySelector( '.todo--editing form a' ).click();
+
+                submit_btn.click();
                 return task.next();
               }
 
@@ -142,7 +145,7 @@ function move_hashtags( direction ){
             }
 
           // #7 submit update
-            var submit_btn = document.querySelector( '.todo--editing form input[type="submit"]' ).click();
+            submit_btn.click();
 
           // #8 wait til its safe to continue
             setTimeout( task.next, 3000 );
@@ -157,35 +160,6 @@ function move_hashtags( direction ){
     });
 
     task.start();
-}
-
-function get_replacement( todo_title ){
-  var replaced_title = null;
-
-  for( var key in replacement_map ){
-    if( ! replacement_map.hasOwnProperty( key ) ) continue;
-
-    if( has_tag( key, todo_title ) ){
-      replaced_title = update_tags( key, replacement_map[ key ], todo_title );
-      break;
-    }
-  }
-
-  return replaced_title;
-}
-
-function update_tags( tag, next_tag, todo_title ){
-  var replaced_title = false;
-
-  if( has_tag( tag, todo_title ) ){
-    replaced_title = todo_title.replace( tag, next_tag );
-  }
-
-  return replaced_title ? replaced_title : todo_title;
-}
-
-function has_tag( tag, title ){
-  return title.indexOf( tag ) === 0;
 }
 
 function TaskManager(callback){
@@ -280,9 +254,8 @@ function TaskManager(callback){
   }
 
   function end_task(){
-
     if( !started ) throw new Error('CAN\'T CALL NEXT STEP BEFORE TASK STARTS');
-    
+
     callback.apply(callback, arguments);
     store = noticeboard = log = api = null;
   }
