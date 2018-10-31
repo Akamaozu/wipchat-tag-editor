@@ -6,7 +6,7 @@ Pretty To-dos. Zero Effort.
 
 ### Move Hashtags
 
-![Move Hashtags](http://public.designbymobi.us/img/move-hashtags.jpg)
+![Move Hashtags](http://public.designbymobi.us/img/move-hashtags-2.jpg)
 
 #### How To Use
 
