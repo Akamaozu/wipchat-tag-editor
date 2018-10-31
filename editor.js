@@ -2,7 +2,7 @@
 
 // #0 configure replacement map
   var replacement_map = {
-    "💡": "🛠️"
+    "🛠️": "⚡"
   }
 
 // #1 get todo dom elements
@@ -19,8 +19,8 @@
     var replaced_title = get_replacement( todo_titles[ i ] );
     if( replaced_title ) todos_to_edit.push( todos[ i ] );
 
-    if( replaced_title ) console.log( i, todo_titles[i] + '\n' + replaced_title, todos[ i ] );
-    else console.log( i, 'nothing to replace here' );
+    if( replaced_title ) console.log( '#' + i + '\n' + todo_titles[i] + '\n' + replaced_title, todos[ i ] );
+    else console.log( '#' + i + ' <nothing to replace>' );
   }
 
 if( todos_to_edit.length < 1 ) alert( 'no todos need tag replacement' );
