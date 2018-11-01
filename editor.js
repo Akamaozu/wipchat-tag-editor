@@ -2,7 +2,11 @@
 
 // #0 configure replacement map
   var replacement_map = {
-    "🛠️": "⚡"
+    "[create]": "⚡",
+    "[cheer]": "🎉",
+    "[plan]": "🤷",
+    "[yay]": "🎉",
+    "[do]": "⚡"
   }
 
 // #1 get todo dom elements
@@ -67,7 +71,6 @@ function get_replacement( todo_title ){
 
     if( has_tag( key, todo_title ) ){
       replaced_title = update_tags( key, replacement_map[ key ], todo_title );
-      break;
     }
   }
 
@@ -86,7 +89,7 @@ function update_tags( tag, next_tag, todo_title ){
 }
 
 function has_tag( tag, title ){
-  return title.indexOf( tag ) === 0;
+  return title.indexOf( tag ) > -1;
 }
 
 function TaskManager(callback){
