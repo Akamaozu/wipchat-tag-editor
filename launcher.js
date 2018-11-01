@@ -141,7 +141,7 @@ function move_hashtags( direction ){
 
               var cleaned_html = input.innerHTML.replace( full_hashtag, '' );
 
-              input.innerHTML = cleaned_html + ' ' + full_hashtag;
+              input.innerHTML = trim( cleaned_html ) + ' ' + full_hashtag;
             }
 
           // #7 submit update
