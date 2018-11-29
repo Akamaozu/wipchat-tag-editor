@@ -34,20 +34,25 @@ else {
 
   todos_to_edit.forEach( function( todo_to_edit ){
     task.step( 'update todo', function(){
+      var edit_btn = todo_to_edit.querySelector( '.todo__edit' ),
+          todo_id = edit_btn.href.replace( /\D/g,'' );
 
-      // #4 click edit btn
-        todo_to_edit.querySelector( '.todo__edit' ).click();
+      // #4 enter edit mode
+        edit_btn.click();
 
       setTimeout( function(){
+        var todo_edit_state_dom = document.querySelector( '#todo_'+ todo_id +'.todo--editing' );
 
         // #5 find input field
-          var input = document.querySelector( '.todo--editing textarea' );
+          var input = todo_edit_state_dom.querySelector( 'textarea' );
 
         // #6 do replacement in input field
           input.innerHTML = get_replacement( input.innerHTML );
 
         // #7 submit update
-          var submit_btn = document.querySelector( '.todo--editing form input[type="submit"]' ).click();
+          var submit_btn = todo_edit_state_dom.querySelector( 'input[type="submit"]' );
+
+          submit_btn.click();
 
         // #8 wait til its safe to continue
           setTimeout( task.next, 3000 );
